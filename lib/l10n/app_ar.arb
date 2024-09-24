@@ -1,0 +1,17 @@
+{
+    "@@locale": "ar",
+    "hello": "مرحباً",
+    "add": "إضافة",
+    "darkmode": "الوضع الليلي",
+    "lightmode": "الوضع المش ليلي",
+    "taskdetails": "بيانات المهمة",
+    "entertaskname": "ادخل اسم المهمة",
+    "entertasksubtitle": "ادخل وصف المهمة",
+    "cancel": "الغاء",
+    "ok": "تم يا لوزة",
+    "waiting": "استنى",
+    "completed": "شطبنا",
+    "title": "العنوان",
+    "subtitle": "وصف",
+    "please": "ارجوك"
+}

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddTaskDialog extends StatefulWidget {
   const AddTaskDialog(
@@ -39,7 +40,8 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                 controller: widget.titleController,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return "Please Enter Task Title";
+                    return AppLocalizations.of(context)
+                        !.add; //+ "please enter some things ";
                   }
 
                   if (value.length < 3) {
@@ -48,16 +50,15 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                   return null;
                 },
                 decoration: const InputDecoration(
-                    hintText: "Enter Title Here!",
-                    border: OutlineInputBorder()),
+                    hintText: "", border: OutlineInputBorder()),
               ),
               const SizedBox(
                 height: 16,
               ),
               TextFormField(
-                decoration: const InputDecoration(
-                    hintText: "Enter Subtitle Here!",
-                    border: OutlineInputBorder()),
+                decoration:  InputDecoration(
+                    hintText: AppLocalizations.of(context)!.add ,
+                    border: const OutlineInputBorder()),
                 controller: widget.subTitleController,
               ),
               const SizedBox(

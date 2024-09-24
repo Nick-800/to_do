@@ -18,11 +18,7 @@ class DrawerTile extends StatelessWidget {
     return Consumer<DarkModeProvider>(builder: (context, darkModeConsumer, _) {
       return Column(
         children: [
-          GestureDetector(
-            onTap: () {
-              onTab();
-            },
-            child: Container(
+             Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: darkModeConsumer.isDark
@@ -47,7 +43,7 @@ class DrawerTile extends StatelessWidget {
                               : Colors.black),
                     ),
                     Switch(
-                        value: false,
+                        value: darkModeConsumer.isDark,
                         onChanged: (value) {
                           onTab();
                         })
@@ -55,7 +51,7 @@ class DrawerTile extends StatelessWidget {
                 ),
               ),
             ),
-          ),
+          
           if (withDivider)
             const Divider(
               thickness: 1,

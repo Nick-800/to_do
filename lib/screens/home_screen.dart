@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do/models/task_model.dart';
 import 'package:to_do/providers/dark_mode_provider.dart';
+import 'package:to_do/providers/language_provider.dart';
 import 'package:to_do/providers/tasks_provider.dart';
 import 'package:to_do/widgets/clickables/drawer_tile.dart';
+import 'package:to_do/widgets/clickables/lang_pick.dart';
 import 'package:to_do/widgets/dialogs/add_task_dialog.dart';
 import 'package:to_do/widgets/cards/task_card.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -27,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    return Consumer<LanguageProvider>(builder: (context, languageConsumer, _){
     return Consumer<DarkModeProvider>(builder: (context, darkModeConsumer, _) {
       return Consumer<TasksProvider>(builder: (context, tasksConsumer, _) {
         return Scaffold(
@@ -48,6 +54,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           icon: darkModeConsumer.isDark
                               ? Icons.light_mode
                               : Icons.dark_mode),
+                        LangPick(title: "Espanol", onTap:(){
+                          Provider.of<LanguageProvider>(context,
+                          listen: false).switchLanguage("es");
+                        })
                     ],
                   ),
                 ),
@@ -85,16 +95,18 @@ class _HomeScreenState extends State<HomeScreen> {
               length: 2,
               child: Column(
                 children: [
-                  const TabBar(
+                   TabBar(
                       isScrollable: false,
                       unselectedLabelColor: Colors.grey,
                       indicatorColor: Colors.blue,
                       tabs: [
                         Tab(
-                          text: "Waiting",
+                          text: AppLocalizations.of(context)!.waiting
+
                         ),
+                        
                         Tab(
-                          text: "Completed",
+                          text: AppLocalizations.of(context)!.completed,
                         )
                       ]),
                   Expanded(
@@ -139,6 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ));
       });
+    });
     });
   }
 }

@@ -6,6 +6,8 @@ import 'package:timeago/timeago.dart';
 import 'package:to_do/models/task_model.dart';
 import 'package:to_do/providers/dark_mode_provider.dart';
 import 'package:to_do/screens/task_details_screen.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TaskCard extends StatelessWidget {
   const TaskCard({super.key, required this.taskModel, required this.onTap});

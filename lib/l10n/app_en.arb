@@ -1,0 +1,17 @@
+{
+    "@@locale": "en",
+    "hello": "Hello",
+    "add": "Add",
+    "darkmode": "Dark  Mode",
+    "lightmode": "Light   Mode",
+    "taskdetails": "Task Details",
+    "entertaskname": "Enter task name",
+    "entertasksubtitle": "Enter task subtitle",
+    "cancel": "Cancel",
+    "ok": "Ok",
+    "waiting": "Waiting",
+    "completed": "Completed",
+    "title": "Title",
+    "subtitle": "Subtitle",
+    "please": "Please"
+}

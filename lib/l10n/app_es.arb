@@ -1,0 +1,17 @@
+{
+    "@@locale": "es",
+    "hello": "Hola",
+    "add": "Añadir",
+    "darkmode": "Modo oscuro",
+    "lightmode": "Modo claro",
+    "taskdetails": "Detalles de la tarea",
+    "entertaskname": "Introduzca el nombre de la tarea",
+    "entertasksubtitle": "Introduzca el subtítulo de la tarea",
+    "cancel": "Cancelar",
+    "ok": "Aceptar",
+    "waiting": "Esperando",
+    "completed": "terminada",
+    "title": "título",
+    "subtitle": "subtitular",
+    "please": "Por  favor"
+}

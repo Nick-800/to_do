@@ -5,59 +5,59 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:to_do/models/task_model.dart';
 
 class TasksProvider with ChangeNotifier {
-  List<TaskModel> tasks = [];
+List<TaskModel> tasks = [];
 
-  addTask(TaskModel tm) {
+    addTask(TaskModel tm) {
     tasks.add(tm);
     storeTasks();
     notifyListeners();
-  }
+    }
 
-  delete(TaskModel tm) {
+    delete(TaskModel tm) {
     tasks.remove(tm);
     storeTasks();
     notifyListeners();
-  }
+    }
 
-  edit(TaskModel tm, TaskModel oldTm) {
+    edit(TaskModel tm, TaskModel oldTm) {
     tasks.remove(oldTm);
     tasks.add(tm);
     storeTasks();
 
     notifyListeners();
-  }
+    }
 
-  switchValue(TaskModel tm) {
+    switchValue(TaskModel tm) {
     tm.isCompleted = !tm.isCompleted;
     storeTasks();
 
     notifyListeners();
-  }
+    }
 
-  storeTasks() async {
+    storeTasks() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     var json =
-        jsonEncode(tasks.map((taskModel) => taskModel.toJson()).toList());
+    jsonEncode(tasks.map((taskModel) => taskModel.toJson()).toList());
 
     if (kDebugMode) {
-      print("JSON FROM STORE $json");
+    print("JSON FROM STORE $json");
     }
     prefs.setString("tasks", json);
     getTasks();
-  }
+    }
 
-  getTasks() async {
+    getTasks() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     var data = prefs.getString("tasks");
     if (kDebugMode) {
-      print("JSON FROM GET $data");
+    print("JSON FROM GET $data");
     }
     if (data != null) {
-      tasks = List<TaskModel>.from(
-          jsonDecode(data).map((x) => TaskModel.fromJson(x)));
-      notifyListeners();
-    }
-  }
-}
+    tasks = List<TaskModel>.from(
+        jsonDecode(data).map((x) => TaskModel.fromJson(x)));
+        notifyListeners();
+        }
+        }
+        }
