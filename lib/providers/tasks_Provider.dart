@@ -1,68 +1,63 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-import 'package:to_do/models/task_models.dart';
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:to_do/models/task_model.dart';
 
+class TasksProvider with ChangeNotifier {
+  List<TaskModel> tasks = [];
 
-class TasksProvider  with ChangeNotifier {
-
-  List<TaskModel>  tasks =[];
-
-  addTask(TaskModel tm){
+  addTask(TaskModel tm) {
     tasks.add(tm);
     storeTasks();
     notifyListeners();
   }
 
-  deleteTask(TaskModel tm){
+  delete(TaskModel tm) {
     tasks.remove(tm);
     storeTasks();
     notifyListeners();
   }
 
-  editTask(TaskModel tm  , TaskModel oldTm){
-    tasks [tasks.indexOf(oldTm)]=tm;
+  edit(TaskModel tm, TaskModel oldTm) {
+    tasks.remove(oldTm);
+    tasks.add(tm);
     storeTasks();
+
     notifyListeners();
   }
-  switchState(TaskModel tm){
-    tm.status=!tm.status;
+
+  switchValue(TaskModel tm) {
+    tm.isCompleted = !tm.isCompleted;
     storeTasks();
+
     notifyListeners();
   }
 
   storeTasks() async {
-    try {
-      print("555555555555555555555555555555555");
-      SharedPreferences pref = await SharedPreferences.getInstance();
-      var json = jsonEncode(tasks.map((task) => task.toJson()).toList());
-      print("Storing tasks: $json"); // Debug line
-      await pref.setString("tasks", json);
-      print("Tasks stored successfully.");
-    } catch (e) {
-      print("Error storing tasks: $e");
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    var json =
+        jsonEncode(tasks.map((taskModel) => taskModel.toJson()).toList());
+
+    if (kDebugMode) {
+      print("JSON FROM STORE $json");
     }
+    prefs.setString("tasks", json);
+    getTasks();
   }
+
   getTasks() async {
-    try {
-      SharedPreferences pref = await SharedPreferences.getInstance();
-      var data = pref.getString("tasks");
-      print("Retrieved tasks data: $data"); // Debug line
-      if (data != null) {
-        List<TaskModel> loadedTasks = List<TaskModel>.from(
-            jsonDecode(data).map((task) => TaskModel.fromJson(task)));
-        print("Loaded tasks: $loadedTasks"); // Debug line
-        if (loadedTasks != tasks) {
-          tasks = loadedTasks;
-          notifyListeners();
-        }
-      }
-    } catch (e) {
-      print("Error retrieving tasks: $e");
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    var data = prefs.getString("tasks");
+    if (kDebugMode) {
+      print("JSON FROM GET $data");
+    }
+    if (data != null) {
+      tasks = List<TaskModel>.from(
+          jsonDecode(data).map((x) => TaskModel.fromJson(x)));
+      notifyListeners();
     }
   }
-
-
-
 }
