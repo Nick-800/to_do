@@ -10,6 +10,7 @@ class AddTaskDialog extends StatefulWidget {
   final TextEditingController titleController;
   final TextEditingController subTitleController;
   final Function onTap;
+
   @override
   State<AddTaskDialog> createState() => _AddTaskDialogState();
 }
@@ -19,6 +20,8 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
 
   @override
   Widget build(BuildContext context) {
+            AppLocalizations localizations = AppLocalizations.of(context)!;
+
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Padding(
@@ -29,9 +32,9 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "Add New Task",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+               Text(
+                localizations.addnewtask,
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               const SizedBox(
                 height: 16,
@@ -45,19 +48,19 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                   }
 
                   if (value.length < 3) {
-                    return "Please Enter Valid Task Title";
+                    return localizations.please + localizations.entertaskname;
                   }
                   return null;
                 },
-                decoration: const InputDecoration(
-                    hintText: "", border: OutlineInputBorder()),
+                decoration:  InputDecoration(
+                    hintText: localizations.entertaskname, border: OutlineInputBorder()),
               ),
               const SizedBox(
                 height: 16,
               ),
               TextFormField(
                 decoration:  InputDecoration(
-                    hintText: AppLocalizations.of(context)!.add ,
+                    hintText: localizations.entertasksubtitle ,
                     border: const OutlineInputBorder()),
                 controller: widget.subTitleController,
               ),
@@ -73,9 +76,9 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                         widget.subTitleController.clear();
                         Navigator.pop(context);
                       },
-                      child: const Text(
-                        "Cancel",
-                        style: TextStyle(color: Colors.red),
+                      child:  Text(
+                        localizations.cancel,
+                        style: const TextStyle(color: Colors.red),
                       )),
                   ElevatedButton(
                       onPressed: () {
@@ -83,7 +86,7 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                           widget.onTap();
                         }
                       },
-                      child: const Text("ADD")),
+                      child:  Text(localizations.add)),
                 ],
               )
             ],

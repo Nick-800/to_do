@@ -32,6 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+     AppLocalizations localizations = AppLocalizations.of(context)!;
+
     return Consumer<LanguageProvider>(builder: (context, languageConsumer, _){
     return Consumer<DarkModeProvider>(builder: (context, darkModeConsumer, _) {
       return Consumer<TasksProvider>(builder: (context, tasksConsumer, _) {
@@ -44,8 +46,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       DrawerTile(
                           text: darkModeConsumer.isDark
-                              ? "Light Mode"
-                              : "Dark Mode",
+                              ? localizations.lightmode
+                              : localizations.darkmode,
                           onTab: () {
                             Provider.of<DarkModeProvider>(context,
                                     listen: false)
@@ -54,10 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           icon: darkModeConsumer.isDark
                               ? Icons.light_mode
                               : Icons.dark_mode),
-                        LangPick(title: "Espanol", onTap:(){
-                          Provider.of<LanguageProvider>(context,
-                          listen: false).switchLanguage("es");
-                        })
+                        LangPick()
                     ],
                   ),
                 ),

@@ -1,14 +1,11 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do/providers/dark_mode_provider.dart';
 import 'package:to_do/providers/language_provider.dart';
 
+// ignore: must_be_immutable
 class LangPick extends StatelessWidget {
-  LangPick({super.key, required this.title, required this.onTap});
-
-  final String title;
-  final Function onTap;
+  LangPick({super.key,});
 
   String dropdownvalue = "en";
 

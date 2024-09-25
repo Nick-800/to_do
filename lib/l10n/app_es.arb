@@ -13,5 +13,6 @@
     "completed": "terminada",
     "title": "título",
     "subtitle": "subtitular",
-    "please": "Por  favor"
+    "please": "Por  favor",
+    "addnewtask":"agregar nueva tarea"
 }
